@@ -1,0 +1,398 @@
+<title>网站用户</title>
+
+<div class="layui-card layadmin-header">
+  <div class="layui-breadcrumb" lay-filter="breadcrumb">
+    <a lay-href="">主页</a>
+    <a><cite>用户</cite></a>
+    <a><cite>网站用户</cite></a>
+  </div>
+</div>
+
+<div class="layui-fluid">
+  <div class="layui-card">
+    <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="layadmin-userfront-formlist">
+      <div class="layui-form-item">
+        <div class="layui-inline">
+          <label class="layui-form-label">用户名</label>
+          <div class="layui-input-block">
+            <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">邮箱</label>
+          <div class="layui-input-block">
+            <input type="text" name="email" placeholder="请输入" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+       
+        <div class="layui-inline">
+          <button class="layui-btn layuiadmin-btn-useradmin" lay-submit lay-filter="LAY-user-front-search">
+            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-card-body">
+      <script type="text/html" id="test-table-toolbar-toolbarDemo">
+          <div class="layui-btn-container">
+              <button class="layui-btn layui-btn-sm btn btn-info" lay-event="add"><i class="iconfont icon-xinzeng"></i>新增</button>
+              <button class="layui-btn layui-btn-sm btn btn-info" lay-event="update"><i class="iconfont icon-bianji"></i>修改</button>
+              <button class="layui-btn layui-btn-sm btn btn-info" lay-event="delete"><i class="iconfont icon-shanchu"></i>删除</button>
+          </div>
+      </script>
+      <table id="LAY-user-manage" lay-filter="LAY-user-manage"></table>
+      <script type="text/html" id="imgTpl">
+        <img style="display: inline-block; width: 50%; height: 100%;" src= {{ d.avatar }}>
+      </script>
+      <script type="text/html" id="table-useradmin-webuser">
+              <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+              <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+            </script>
+    </div>
+  </div>
+</div>
+
+<div class="layui-form"   style="padding: 20px 0 0 0;display:none">
+  <div class="layui-form-item">
+    <label class="layui-form-label">用户名</label>
+    <div class="layui-input-inline">
+      <script type="text/html" template>
+        <input type="text" id="UserName" name="UserName"  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+      <label class="layui-form-label">邮箱</label>
+      <div class="layui-input-inline">
+        <script type="text/html" template>
+          <input type="text" name="Email" id="Email"  lay-verify="email" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+        </script>
+      </div>
+    </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">手机号码</label>
+    <div class="layui-input-inline">
+      <script type="text/html" template>
+          <input type="text" name="PhoneNumber" id="PhoneNumber"  lay-verify="phone" placeholder="请输入号码" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">密码</label>
+    <div class="layui-input-inline">
+      <script type="text/html" template>
+        <input type="text" name="Password" id="Password"  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input" >
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+      <label class="layui-form-label">确认密码</label>
+      <div class="layui-input-inline">
+        <script type="text/html" template>
+          <input type="text" name="ConfirmPassword" id="ConfirmPassword"  lay-verify="required" placeholder="请确认密码" autocomplete="off" class="layui-input" >
+        </script>
+      </div>
+    </div>
+  <div class="layui-form-item" lay-filter="sex">
+    <label class="layui-form-label">选择性别</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="radio" name="sex" value="男" title="男" >
+        <input type="radio" name="sex" value="女" title="女" >
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label"></label>
+    <div class="layui-input-inline">
+      <input type="button" lay-submit lay-filter="LAY-user-front-submit" value="确认" class="layui-btn">
+    </div>
+  </div>
+</div>
+
+
+<div class="layui-card-body" id="form" style="padding-top: 20px ;display:none">
+    <form class="layui-form" action="" lay-filter="component-form-element">
+      <div class="layui-row layui-col-space10 layui-form-item">
+        <div class="layui-col-lg6">
+          <label class="layui-form-label">用户名</label>
+          <div class="layui-input-block">
+            <input type="text" name="UserName"  id="UserName" lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-col-lg6">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-block">
+              <input type="text" name="Email" id="Email" lay-verify="required" placeholder="邮箱" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-col-lg6">
+              <label class="layui-form-label">手机号码</label>
+              <div class="layui-input-block">
+                <input type="text" name="PhoneNumber" id="PhoneNumber" lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-col-lg6">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                  <input type="text" name="Password" id="Password" lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+
+              <div class="layui-col-lg6">
+                  <label class="layui-form-label">确认密码</label>
+                  <div class="layui-input-block">
+                    <input type="text" name="ComfirmPassword" id="ComfirmPassword" lay-verify="required" placeholder="确认密码" autocomplete="off" class="layui-input">
+                  </div>
+                </div>
+        <!-- <div class="layui-col-lg6">
+          <label class="layui-form-label">技术工种：</label>
+          <div class="layui-input-block">
+            <select name="type" lay-verify="required" lay-filter="aihao">
+              <option value=""></option>
+              <option value="0">前端工程师</option>
+              <option value="1">Node.js工程师</option>
+              <option value="2">PHP工程师</option>
+              <option value="3">Java工程师</option>
+              <option value="4">运维</option>
+              <option value="4">视觉设计师</option>
+            </select>
+          </div>
+        </div> -->
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">性别：</label>
+        <div class="layui-input-block">
+          <input type="radio" name="sex" value="男" title="男">
+          <input type="radio" name="sex" value="女" title="女">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" id="btnSave">保存</button>
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+      </div>
+    </form>
+  </div>
+<script src="../../../start/layui/lay/modules/jqueryextent.js"></script>
+<script>
+  var param = {
+    data: null,
+    table: null
+  };
+  var method = {
+    init: function () {
+      debugger
+      method.initTable();
+      method.eventBind();
+    },
+    eventBind: function () {
+      $("#login").click(function () {
+        method.signIn();
+      });
+
+      $("#btnClose").click(function () {
+        layer.closeAll();
+      });
+
+      $("#btnSave").click(function () {
+        //添加
+        var json = $.toJson("#form");
+        if (!param.data) {
+          var methodType = 'post';
+          method.saveData(json, methodType);
+        }
+        else {
+          //修改
+          var methodType = 'put';
+          json["Id"] = param.data.Id;
+          method.saveData(json, methodType);
+        }
+      });
+
+      $("#search").click(function () {
+        method.tableReload();
+      });
+    },
+
+    initTable: function () {
+      layui.use(['table'], function () {
+        var table = layui.table;
+        param.table = table;
+        table.render({
+          elem: '#LAY-user-manage'
+          , url: uri+'/api/User/QueryPaged'
+          , toolbar: '#test-table-toolbar-toolbarDemo'
+          , title: '用户数据表'
+          , cols: [[
+            { type: 'radio', fixed: 'left' }
+            , { field: 'Id', title: 'ID', width: 80, fixed: 'left', unresize: true, sort: true }
+            , { field: 'UserName', title: '用户名', width: 120, edit: 'text' }
+            , { field: 'PhoneNumber', title: '手机号', width: 120, edit: 'text' }
+            , {
+              field: 'Email', title: '邮箱', width: 250, edit: 'text', templet: function (res) {
+                return '<em>' + res.Email + '</em>'
+              }
+            }
+            //, { field: 'sex', title: '性别', width: 80, edit: 'text', sort: true }
+            //, { field: 'city', title: '城市', width: 100 }
+            //, { field: 'sign', title: '签名' }
+            //, { field: 'experience', title: '积分', width: 80, sort: true }
+            // , { field: 'ip', title: 'IP', width: 120 }
+            // , { field: 'logins', title: '登入次数', width: 100, sort: true }
+            //, { field: 'joinTime', title: '加入时间', width: 120 }
+            //, { fixed: 'right', title: '操作', toolbar: '#test-table-toolbar-barDemo', width: 150 }
+          ]]
+          , page: true
+        });
+
+        //头工具栏事件
+        table.on('toolbar(LAY-user-manage)', function (obj) {
+          var checkStatus = table.checkStatus(obj.config.id);
+          switch (obj.event) {
+            case 'add':
+              //var data = checkStatus.data;
+              //layer.alert(JSON.stringify(data));
+              debugger
+              param.data = null;
+              $("#Password").parent().show();
+              $("#ConfirmPassword").parent().show();
+              $.clearValue("#form .form-group");
+              method.openDialog();
+              break;
+            case 'update':
+              $("#Password").parent().hide();
+              $("#ConfirmPassword").parent().hide();
+              param.data = checkStatus.data[0];
+              if (!param.data) {
+                layer.alert("请选择一行数据进行操作");
+                return;
+              }
+              method.openDialog();
+              method.initEditData();
+              break;
+            case 'delete':
+              layer.alert("请选择一行数据进行操作");
+              break;
+          };
+        });
+
+        //监听行工具事件
+        table.on('tool(LAY-user-manage)', function (obj) {
+          var data = obj.data;
+          //if (obj.event === 'del') {
+          //    layer.confirm('真的删除行么', function (index) {
+          //        obj.del();
+          //        layer.close(index);
+          //    });
+          //} else if (obj.event === 'edit') {
+          //    layer.prompt({
+          //        formType: 2
+          //        , value: data.email
+          //    }, function (value, index) {
+          //        obj.update({
+          //            email: value
+          //        });
+          //        layer.close(index);
+          //    });
+          //}
+        });
+        table.on('row(test-table-toolbar)', function (obj) {
+          var data = obj.data;
+
+          layer.alert(JSON.stringify(data), {
+            title: '当前行数据：'
+          });
+
+          ////标注选中样式
+          //obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
+        });
+      });
+    },
+    
+    tableReload: function () {
+      param.table.reload('test-table-toolbar', {
+        page: {
+          curr: 1 //重新从第 1 页开始
+        }
+        , where: {
+          UserName: $("#UserName").val()
+        }
+      });
+    },
+
+    openDialog: function () {
+      layer.open({
+        type: 1,
+        title: "用户信息编辑",
+        shadeClose: false,
+        skin: '',
+        area: ['600px', '450px'],//宽--高
+        content: $("#form"),
+        cancel: function () {
+          $("#form").hide();
+          layer.closeAll();
+        }
+      });
+    },
+
+    saveData: function (json, methodType) {
+      var tipMsg = "添加成功";
+      if (methodType == "put") {
+        tipMsg = "修改成功";
+      }
+      $.ajax({
+        url: uri+"/api/User/",
+        method: methodType,
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(json),
+        success: function (res) {
+          if (res.IsError) {
+            layer.alert(res.Message);
+            return;
+          }
+          else {
+            layer.closeAll();
+            layer.msg(tipMsg, { "icon": 1 });
+            method.tableReload();
+          }
+        }
+      })
+    },
+
+    initEditData: function () {
+      var editData = param.data;
+      if (editData) {
+        //对input 标签 和 textarea 标签赋值
+        $.toValue(editData, "#form .form-group");
+      }
+    },
+
+    signIn: function () {
+      var user = {
+        UserName: $("#UserName").val(),
+        Password: $("#Password").val()
+      };
+      $.ajax({
+        url: uri+"/api/account/sign-in",
+        method: "post",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(user),
+        success: function (res) {
+          console.log(res);
+        }
+      });
+    },
+
+
+
+  };
+  $(function () {
+    method.init();
+  });
+</script>
