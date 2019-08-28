@@ -64,7 +64,7 @@
               <dd><a lay-href="set/user/info">基本资料</a></dd>
               <dd><a lay-href="set/user/password">修改密码</a></dd>
               <hr>
-              <dd id="logout"  style="text-align: center;"><a>退出</a></dd>
+              <dd id="logout" style="text-align: center;"><a>退出</a></dd>
             </dl>
       </li>
       
@@ -128,11 +128,13 @@
   
 </div>
 <script src="../../start/layui/lay/modules/jquery2.js"></script>
+<script src="../../start/layui/lay/modules/jqueryextent.js"></script>
 <script>
     layui.use(['admin', 'form','element'], function(){
       //var $ = layui.$
       var element = layui.element
-      ,form = layui.form;
+      ,form = layui.form
+      ;
         
 
       var param = {
@@ -147,6 +149,7 @@
 
         eventBind:function(){
           $("#logout").click(function(){
+            debugger
             method.logOut();
           });
         },
@@ -219,30 +222,20 @@
         },
 
         getUserInfo:function(){
-          $.ajax({
-                url: uri+"/api/account/profile",
-                dataType: "json",
-                contentType: "application/json",
-                method: "post",
-                success: function (res) {
-                  debugger
-                    if (res.IsError) {
-                      location.hash = '/user/login';
-                        return;
-                    }
-                    else {
-                        $("#UserNameDiv").html(res.Data);
-                    }
-                },
-                error: function () {
-
-                }
-            })
+          debugger
+          var userInfo = sessionStorage.getItem("CurrentUser");
+          if(!userInfo)
+          {
+            location.hash = "/user/login";
+            return;
+          }
+          userInfo = JSON.parse(userInfo);
+          $("#UserNameDiv").html(userInfo.UserName);
         },
 
         logOut:function(){
             $.ajax({
-              url: "/api/account/sign-out",
+              url: uri+"/api/account/sign-out",
               dataType: "json",
               contentType: "application/json",
               method: "post",

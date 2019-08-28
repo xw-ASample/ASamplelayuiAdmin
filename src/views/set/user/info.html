@@ -16,8 +16,8 @@
         <div class="layui-card-header">设置我的资料</div>
         <div class="layui-card-body" pad15>
           
-          <div class="layui-form" lay-filter="">
-            <div class="layui-form-item">
+          <div class="layui-form" id="form">
+            <!-- <div class="layui-form-item">
               <label class="layui-form-label">我的角色</label>
               <div class="layui-input-inline">
                 <select name="role" lay-verify="">
@@ -28,28 +28,28 @@
                 </select> 
               </div>
               <div class="layui-form-mid layui-word-aux">当前角色不可更改为其它角色</div>
-            </div>
+            </div> -->
             <div class="layui-form-item">
               <label class="layui-form-label">用户名</label>
               <div class="layui-input-inline">
-                <input type="text" name="username" value="xianxin" readonly class="layui-input">
+                <input type="text" name="UserName" id="UserName"  readonly class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">不可修改。一般用于后台登入名</div>
             </div>
             <div class="layui-form-item">
-              <label class="layui-form-label">昵称</label>
+              <label class="layui-form-label">登录名</label>
               <div class="layui-input-inline">
-                <input type="text" name="nickname" value="贤心" lay-verify="nickname" autocomplete="off" placeholder="请输入昵称" class="layui-input">
+                <input type="text" name="LoginName" id="LoginName" autocomplete="off" placeholder="请输入登录名" class="layui-input">
               </div>
             </div>
-            <div class="layui-form-item">
+            <!-- <div class="layui-form-item">
               <label class="layui-form-label">性别</label>
               <div class="layui-input-block">
                 <input type="radio" name="sex" value="男" title="男">
                 <input type="radio" name="sex" value="女" title="女" checked>
               </div>
-            </div>
-            <div class="layui-form-item">
+            </div> -->
+            <!-- <div class="layui-form-item">
               <label class="layui-form-label">头像</label>
               <div class="layui-input-inline">
                 <input name="avatar" lay-verify="required" id="LAY_avatarSrc" placeholder="图片地址" value="http://cdn.layui.com/avatar/168.jpg" class="layui-input">
@@ -60,17 +60,17 @@
                 </button>
                 <button class="layui-btn layui-btn-primary" layadmin-event="avartatPreview">查看图片</button >
               </div>
-           </div>
+           </div> -->
             <div class="layui-form-item">
               <label class="layui-form-label">手机</label>
               <div class="layui-input-inline">
-                <input type="text" name="cellphone" value="" lay-verify="phone" autocomplete="off" class="layui-input">
+                <input type="text" name="PhoneNumber" id="PhoneNumber" lay-verify="phone" autocomplete="off" class="layui-input">
               </div>
             </div>
             <div class="layui-form-item">
               <label class="layui-form-label">邮箱</label>
               <div class="layui-input-inline">
-                <input type="text" name="email" value="" lay-verify="email" autocomplete="off" class="layui-input">
+                <input type="text" name="Email" id="Email" lay-verify="Email" autocomplete="off" class="layui-input">
               </div>
             </div>
             <div class="layui-form-item layui-form-text">
@@ -81,7 +81,7 @@
             </div>
             <div class="layui-form-item">
               <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="setmyinfo">确认修改</button>
+                <button class="layui-btn" id="btnUpdate">确认修改</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
               </div>
             </div>
@@ -94,5 +94,51 @@
 </div>
 
 <script>
-layui.use('set', layui.factory('set'));
+  var param = {
+
+  };
+  var method = {
+    init:function(){
+      debugger
+      method.getUserInfo();
+    },
+    eventBind:function(){
+      $("#btnUpdate").click(function(){
+
+      });
+    },
+
+    updateInfo:function(){
+      var json = $.toJson("#form .layui-form-item");
+
+    },
+
+    getUserInfo:function(){
+      var userInfo = sessionStorage.getItem("CurrentUser");
+      if(!userInfo)
+      {
+        location.hash = "/user/login";
+        return;
+      }
+      var user = JSON.parse(userInfo);
+      $.ajax({
+        url:uri+'/api/account/profile',
+        method:'post',
+        dataType:'json',
+        contentType:'application/json',
+        data:JSON.stringify({"UserId":user.UserId}),
+        success:function(res){
+          if(res.IsError){
+            layer.alert(res.Message);
+            return;
+          }
+          $.toValue(res.Data,"#form .layui-form-item");
+        }
+      });
+    }
+  };
+
+  $(function(){
+    method.init();
+  })
 </script>

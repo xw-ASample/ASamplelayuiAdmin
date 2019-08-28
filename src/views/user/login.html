@@ -116,6 +116,7 @@ layui.use(['admin', 'form', 'user'], function(){
 
   var method = {
     init:function(){
+      debugger
       method.eventBind();
     },
     
@@ -143,6 +144,7 @@ layui.use(['admin', 'form', 'user'], function(){
             return;
           }
           layer.msg("登录成功",{"icon":1});
+          sessionStorage.setItem("CurrentUser",JSON.stringify({"UserName":res.Data.UserName,"UserId":res.Data.UserId}));
           location.hash = "/";
           console.log(res);
         }
