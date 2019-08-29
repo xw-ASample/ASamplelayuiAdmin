@@ -15,18 +15,20 @@
         <div class="layui-inline">
           <label class="layui-form-label">用户名</label>
           <div class="layui-input-block">
-            <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input">
+            <input type="text" name="SearchUserName" id="SearchUserName" placeholder="请输入" autocomplete="off"
+              class="layui-input">
           </div>
         </div>
         <div class="layui-inline">
           <label class="layui-form-label">邮箱</label>
           <div class="layui-input-block">
-            <input type="text" name="email" placeholder="请输入" autocomplete="off" class="layui-input">
+            <input type="text" name="SearchEmail" id="SearchEmail" placeholder="请输入" autocomplete="off"
+              class="layui-input">
           </div>
         </div>
-       
+
         <div class="layui-inline">
-          <button class="layui-btn layuiadmin-btn-useradmin" lay-submit lay-filter="LAY-user-front-search">
+          <button class="layui-btn layuiadmin-btn-useradmin" id="search">
             <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
           </button>
         </div>
@@ -34,120 +36,66 @@
     </div>
 
     <div class="layui-card-body">
-      <script type="text/html" id="test-table-toolbar-toolbarDemo">
+      <script type="text/html" id="usermanage-toolbar">
           <div class="layui-btn-container">
               <button class="layui-btn layui-btn-sm btn btn-info" lay-event="add"><i class="iconfont icon-xinzeng"></i>新增</button>
               <button class="layui-btn layui-btn-sm btn btn-info" lay-event="update"><i class="iconfont icon-bianji"></i>修改</button>
               <button class="layui-btn layui-btn-sm btn btn-info" lay-event="delete"><i class="iconfont icon-shanchu"></i>删除</button>
           </div>
       </script>
-      <table id="LAY-user-manage" lay-filter="LAY-user-manage"></table>
+      <table id="usermanage" lay-filter="usermanage"></table>
       <script type="text/html" id="imgTpl">
         <img style="display: inline-block; width: 50%; height: 100%;" src= {{ d.avatar }}>
       </script>
-      <script type="text/html" id="table-useradmin-webuser">
+      <!-- <script type="text/html" id="table-useradmin-webuser">
               <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
               <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
-            </script>
-    </div>
-  </div>
-</div>
-
-<div class="layui-form"   style="padding: 20px 0 0 0;display:none">
-  <div class="layui-form-item">
-    <label class="layui-form-label">用户名</label>
-    <div class="layui-input-inline">
-      <script type="text/html" template>
-        <input type="text" id="UserName" name="UserName"  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
-      </script>
-    </div>
-  </div>
-  <div class="layui-form-item">
-      <label class="layui-form-label">邮箱</label>
-      <div class="layui-input-inline">
-        <script type="text/html" template>
-          <input type="text" name="Email" id="Email"  lay-verify="email" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
-        </script>
-      </div>
-    </div>
-  <div class="layui-form-item">
-    <label class="layui-form-label">手机号码</label>
-    <div class="layui-input-inline">
-      <script type="text/html" template>
-          <input type="text" name="PhoneNumber" id="PhoneNumber"  lay-verify="phone" placeholder="请输入号码" autocomplete="off" class="layui-input">
-      </script>
-    </div>
-  </div>
-  
-  <div class="layui-form-item">
-    <label class="layui-form-label">密码</label>
-    <div class="layui-input-inline">
-      <script type="text/html" template>
-        <input type="text" name="Password" id="Password"  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input" >
-      </script>
-    </div>
-  </div>
-  <div class="layui-form-item">
-      <label class="layui-form-label">确认密码</label>
-      <div class="layui-input-inline">
-        <script type="text/html" template>
-          <input type="text" name="ConfirmPassword" id="ConfirmPassword"  lay-verify="required" placeholder="请确认密码" autocomplete="off" class="layui-input" >
-        </script>
-      </div>
-    </div>
-  <div class="layui-form-item" lay-filter="sex">
-    <label class="layui-form-label">选择性别</label>
-    <div class="layui-input-block">
-      <script type="text/html" template>
-        <input type="radio" name="sex" value="男" title="男" >
-        <input type="radio" name="sex" value="女" title="女" >
-      </script>
-    </div>
-  </div>
-  <div class="layui-form-item">
-    <label class="layui-form-label"></label>
-    <div class="layui-input-inline">
-      <input type="button" lay-submit lay-filter="LAY-user-front-submit" value="确认" class="layui-btn">
+            </script> -->
     </div>
   </div>
 </div>
 
 
 <div class="layui-card-body" id="form" style="padding-top: 20px ;display:none">
-    <form class="layui-form" action="" lay-filter="component-form-element">
-      <div class="layui-row layui-col-space10 layui-form-item">
-        <div class="layui-col-lg6">
-          <label class="layui-form-label">用户名</label>
-          <div class="layui-input-block">
-            <input type="text" name="UserName"  id="UserName" lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
-          </div>
+  <form class="layui-form" action="" lay-filter="component-form-element">
+    <div class="layui-row layui-col-space10 layui-form-item">
+      <div class="layui-col-lg6">
+        <label class="layui-form-label">用户名</label>
+        <div class="layui-input-block">
+          <input type="text" name="UserName" id="UserName" lay-verify="required" placeholder="用户名" autocomplete="off"
+            class="layui-input">
         </div>
-        <div class="layui-col-lg6">
-            <label class="layui-form-label">邮箱</label>
-            <div class="layui-input-block">
-              <input type="text" name="Email" id="Email" lay-verify="required" placeholder="邮箱" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-          <div class="layui-col-lg6">
-              <label class="layui-form-label">手机号码</label>
-              <div class="layui-input-block">
-                <input type="text" name="PhoneNumber" id="PhoneNumber" lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
-              </div>
-            </div>
-            <div class="layui-col-lg6">
-                <label class="layui-form-label">密码</label>
-                <div class="layui-input-block">
-                  <input type="text" name="Password" id="Password" lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
-                </div>
-              </div>
+      </div>
+      <div class="layui-col-lg6">
+        <label class="layui-form-label">邮箱</label>
+        <div class="layui-input-block">
+          <input type="text" name="Email" id="Email" lay-verify="required" placeholder="邮箱" autocomplete="off"
+            class="layui-input">
+        </div>
+      </div>
+      <div class="layui-col-lg6">
+        <label class="layui-form-label">手机号码</label>
+        <div class="layui-input-block">
+          <input type="text" name="PhoneNumber" id="PhoneNumber" lay-verify="required" placeholder="用户名"
+            autocomplete="off" class="layui-input">
+        </div>
+      </div>
+      <div class="layui-col-lg6">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-block">
+          <input type="text" name="Password" id="Password" lay-verify="required" placeholder="密码" autocomplete="off"
+            class="layui-input">
+        </div>
+      </div>
 
-              <div class="layui-col-lg6">
-                  <label class="layui-form-label">确认密码</label>
-                  <div class="layui-input-block">
-                    <input type="text" name="ComfirmPassword" id="ComfirmPassword" lay-verify="required" placeholder="确认密码" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
-        <!-- <div class="layui-col-lg6">
+      <div class="layui-col-lg6">
+        <label class="layui-form-label">确认密码</label>
+        <div class="layui-input-block">
+          <input type="text" name="ComfirmPassword" id="ComfirmPassword" lay-verify="required" placeholder="确认密码"
+            autocomplete="off" class="layui-input">
+        </div>
+      </div>
+      <!-- <div class="layui-col-lg6">
           <label class="layui-form-label">技术工种：</label>
           <div class="layui-input-block">
             <select name="type" lay-verify="required" lay-filter="aihao">
@@ -161,22 +109,22 @@
             </select>
           </div>
         </div> -->
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">性别：</label>
+      <div class="layui-input-block">
+        <input type="radio" name="sex" value="男" title="男">
+        <input type="radio" name="sex" value="女" title="女">
       </div>
-      <div class="layui-form-item">
-        <label class="layui-form-label">性别：</label>
-        <div class="layui-input-block">
-          <input type="radio" name="sex" value="男" title="男">
-          <input type="radio" name="sex" value="女" title="女">
-        </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button class="layui-btn" id="btnSave">保存</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
       </div>
-      <div class="layui-form-item">
-        <div class="layui-input-block">
-          <button class="layui-btn" id="btnSave">保存</button>
-          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-        </div>
-      </div>
-    </form>
-  </div>
+    </div>
+  </form>
+</div>
 <script src="../../../start/layui/lay/modules/jqueryextent.js"></script>
 <script>
   var param = {
@@ -214,6 +162,7 @@
       });
 
       $("#search").click(function () {
+        debugger
         method.tableReload();
       });
     },
@@ -223,9 +172,9 @@
         var table = layui.table;
         param.table = table;
         table.render({
-          elem: '#LAY-user-manage'
-          , url: uri+'/api/User/QueryPaged'
-          , toolbar: '#test-table-toolbar-toolbarDemo'
+          elem: '#usermanage'
+          , url: uri + '/api/User/QueryPaged'
+          , toolbar: '#usermanage-toolbar'
           , title: '用户数据表'
           , cols: [[
             { type: 'radio', fixed: 'left' }
@@ -250,7 +199,7 @@
         });
 
         //头工具栏事件
-        table.on('toolbar(LAY-user-manage)', function (obj) {
+        table.on('toolbar(usermanage)', function (obj) {
           var checkStatus = table.checkStatus(obj.config.id);
           switch (obj.event) {
             case 'add':
@@ -281,7 +230,7 @@
         });
 
         //监听行工具事件
-        table.on('tool(LAY-user-manage)', function (obj) {
+        table.on('tool(usermanage)', function (obj) {
           var data = obj.data;
           //if (obj.event === 'del') {
           //    layer.confirm('真的删除行么', function (index) {
@@ -300,7 +249,7 @@
           //    });
           //}
         });
-        table.on('row(test-table-toolbar)', function (obj) {
+        table.on('row(usermanage)', function (obj) {
           var data = obj.data;
 
           layer.alert(JSON.stringify(data), {
@@ -312,14 +261,14 @@
         });
       });
     },
-    
+
     tableReload: function () {
-      param.table.reload('test-table-toolbar', {
+      param.table.reload('usermanage', {
         page: {
           curr: 1 //重新从第 1 页开始
         }
         , where: {
-          UserName: $("#UserName").val()
+          UserName: $("#SearchUserName").val()
         }
       });
     },
@@ -345,7 +294,7 @@
         tipMsg = "修改成功";
       }
       $.ajax({
-        url: uri+"/api/User/",
+        url: uri + "/api/User/",
         method: methodType,
         dataType: "json",
         contentType: "application/json",
@@ -378,7 +327,7 @@
         Password: $("#Password").val()
       };
       $.ajax({
-        url: uri+"/api/account/sign-in",
+        url: uri + "/api/account/sign-in",
         method: "post",
         dataType: "json",
         contentType: "application/json",

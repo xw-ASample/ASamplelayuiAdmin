@@ -21,9 +21,9 @@
                         </div>
                         <button class="layui-btn" id="search">搜索</button>
                     </div>
-                    <table class="layui-hide" id="test-table-toolbar" lay-filter="test-table-toolbar"></table>
+                    <table class="layui-hide" id="menumanage"></table>
 
-                    <script type="text/html" id="test-table-toolbar-toolbarDemo">
+                    <script type="text/html" id="menumanage-toolbar">
                             <div class="layui-btn-container">
                                 <button class="layui-btn layui-btn-sm btn btn-info" lay-event="add"><i class="iconfont icon-xinzeng"></i>新增</button>
                                 <button class="layui-btn layui-btn-sm btn btn-info" lay-event="update"><i class="iconfont icon-bianji"></i>修改</button>
@@ -31,7 +31,7 @@
                             </div>
                         </script>
 
-                    <!-- @*<script type="text/html" id="test-table-toolbar-barDemo">
+                    <!-- @*<script type="text/html" id="menumanage-barDemo">
                                 <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                             </script>*@ -->
@@ -175,9 +175,9 @@
                 var table = layui.table;
                 param.table = table;
                 table.render({
-                    elem: '#test-table-toolbar'
+                    elem: '#menumanage'
                     , url: uri + '/api/Right/QueryPaged'
-                    , toolbar: '#test-table-toolbar-toolbarDemo'
+                    , toolbar: '#menumanage-toolbar'
                     , title: '用户数据表'
                     , cols: [[
                         { type: 'radio', fixed: 'left' }
@@ -194,13 +194,13 @@
                         // , { field: 'ip', title: 'IP', width: 120 }
                         // , { field: 'logins', title: '登入次数', width: 100, sort: true }
                         //, { field: 'joinTime', title: '加入时间', width: 120 }
-                        //, { fixed: 'right', title: '操作', toolbar: '#test-table-toolbar-barDemo', width: 150 }
+                        //, { fixed: 'right', title: '操作', toolbar: '#menumanage-barDemo', width: 150 }
                     ]]
                     , page: true
                 });
 
                 //头工具栏事件
-                table.on('toolbar(test-table-toolbar)', function (obj) {
+                table.on('toolbar(menumanage)', function (obj) {
                     var checkStatus = table.checkStatus(obj.config.id);
                     switch (obj.event) {
                         case 'add':
@@ -228,7 +228,7 @@
                 });
 
                 //监听行工具事件
-                table.on('tool(test-table-toolbar)', function (obj) {
+                table.on('tool(menumanage)', function (obj) {
                     var data = obj.data;
                     if (obj.event === 'del') {
                         layer.confirm('真的删除行么', function (index) {
@@ -251,7 +251,7 @@
         },
 
         tableReload: function () {
-            param.table.reload('test-table-toolbar', {
+            param.table.reload('menumanage', {
                 page: {
                     curr: 1 //重新从第 1 页开始
                 }
